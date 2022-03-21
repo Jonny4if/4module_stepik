@@ -6,3 +6,5 @@ __pycache__/test_main_page.cpython-310-pytest-7.1.0.pyc
 /pages/__pycache__/__init__.cpython-310.pyc
 /pages/__pycache__/base_page.cpython-310.pyc
 /pages/__pycache__/main_page.cpython-310.pyc
+/pages/__pycache__/locators.cpython-310.pyc
+/pages/__pycache__/login_page.cpython-310.pyc
