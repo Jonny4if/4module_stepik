@@ -1,13 +1,14 @@
 from .base_page import BasePage
+from .login_page import LoginPage
 from .locators import ProductPageLocators
+from .locators import BasePageLocators
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoAlertPresentException
 import math
+
 class ProductPage(BasePage):
-    
     def should_be_product_page(self):
         self.add_to_cart()
-        self.solve_quiz_and_get_code()
         self.product_name()
         self.product_price()
 
@@ -15,7 +16,7 @@ class ProductPage(BasePage):
         # добавляем товар в корзину
         link_add_to_cart = self.browser.find_element(*ProductPageLocators.BTN_ADD_TO_CART)
         link_add_to_cart.click()
-        
+            
         # получаем проверочный код
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
@@ -42,3 +43,17 @@ class ProductPage(BasePage):
         price_page = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_PAGE).text
         price_cart = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_CART).text
         assert price_page == price_cart, "Different price!"
+
+    def go_to_login_page_from_product_page(self):
+        # проверка, что со страницы продукта мождено перейти на страницу авторизации
+        self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
+        # Запукса теста на проверку страницы авторизации
+        LoginPage.should_be_login_page
+
+    def should_not_be_success_message(self):
+        # отрицательная проверка сообщения о добавлении товара в корзину
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
+
+    def wait_close_success_message(self):
+        # отрицательная проверка что ообщения о добавлении товара в корзину пропадает
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
