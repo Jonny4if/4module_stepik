@@ -45,9 +45,9 @@ class ProductPage(BasePage):
         assert price_page == price_cart, "Different price!"
 
     def go_to_login_page_from_product_page(self):
-        # проверка, что со страницы продукта мождено перейти на страницу авторизации
+        # проверка, что со страницы продукта можно перейти на страницу авторизации
         self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
-        # Запукса теста на проверку страницы авторизации
+        # Запуск теста на проверку страницы авторизации
         LoginPage.should_be_login_page
 
     def should_not_be_success_message(self):
