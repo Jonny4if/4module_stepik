@@ -38,6 +38,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
 
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     link = " http://selenium1py.pythonanywhere.com/catalogue/the-girl-who-kicked-the-hornets-nest_199/"
-    page = BasketPage(browser, link)
+    page = ProductPage(browser, link)
     page.open()
-    page.basket_opened_and_basket_clear()
+    basket_page = BasketPage(browser, browser.current_url)
+    basket_page.basket_opened_and_basket_clear()
