@@ -51,9 +51,9 @@ class ProductPage(BasePage):
         LoginPage.should_be_login_page
 
     def should_not_be_success_message(self):
-        # отрицательная проверка сообщения о добавлении товара в корзину
+        # отрицательная проверка отсутствия сообщения о добавлении товара в корзину
         assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
 
     def wait_close_success_message(self):
-        # отрицательная проверка что ообщения о добавлении товара в корзину пропадает
+        # отрицательная проверка что cобщения о добавлении товара в корзину пропадает
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"

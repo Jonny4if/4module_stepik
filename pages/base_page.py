@@ -12,15 +12,26 @@ class BasePage():
         self.browser.implicitly_wait(timeout)
 
     def should_be_login_link(self):
+        # проверка наличия ссылки на страницу авторизации
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+    
+    def go_to_login_page(self):
+        # переход на страницу авторизации
+        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        link.click()
 
     def should_be_link_go_to_cart(self):
-        # переходим  в корзину
+        # проверка наличия ссылки перехода в корзину
         link = self.browser.find_element(*BasePageLocators.GO_TO_CART)
         assert self.browser.find_element(*BasePageLocators.GO_TO_CART), "Link go to cart is not presented"  
 
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                    " probably unauthorised user"
+
     def is_disappeared(self, how, what, timeout=4):
+        # ожидание что элемент исчезнет
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException).\
             until_not(EC.presence_of_element_located((how, what)))
@@ -29,6 +40,7 @@ class BasePage():
         return True
 
     def is_element_present(self, how, what):
+        # проверка наличия элемента на странице
         try:
             self.browser.find_element(how, what)
         except (NoSuchElementException):
@@ -36,6 +48,7 @@ class BasePage():
         return True    
     
     def is_not_element_present(self, how, what, timeout=4):
+        # проверка отсутсвия элемента на странице
         try:
             WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
