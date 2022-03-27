@@ -1,5 +1,4 @@
 from pages.product_page import ProductPage
-import time
 import pytest
 
 
@@ -17,11 +16,10 @@ class TestAddProcuctToCart:
     @pytest.fixture()
     def browser_product_in_cart(self, browser, link):
         print("\nstart browser for test..")
-        page = ProductPage(browser, link)   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        page = ProductPage(browser, link)   # инициализируем Page Object
         page.open()                         # открываем страницу
         page.add_to_cart()                  # выполняем метод добавление товара в корзину
         page.solve_quiz_and_get_code()      # выполняем метод ввода проверочного кода
-        time.sleep(5)
         return page                         # возвращаем значение страницы в состоянии добавленого товара + введеного кода
 
     def test_guest_can_add_product_to_basket(self, browser_product_in_cart):

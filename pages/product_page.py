@@ -8,6 +8,7 @@ import math
 
 class ProductPage(BasePage):
     def should_be_product_page(self):
+        # проверка соотвествия страницы продукта
         self.add_to_cart()
         self.product_name()
         self.product_price()

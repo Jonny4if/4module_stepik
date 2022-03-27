@@ -23,10 +23,10 @@ class BasePage():
 
     def should_be_link_go_to_cart(self):
         # проверка наличия ссылки перехода в корзину
-        link = self.browser.find_element(*BasePageLocators.GO_TO_CART)
         assert self.browser.find_element(*BasePageLocators.GO_TO_CART), "Link go to cart is not presented"  
 
     def should_be_authorized_user(self):
+        # проверка наличия иконки зарегистированого user
         assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
                                                                     " probably unauthorised user"
 
